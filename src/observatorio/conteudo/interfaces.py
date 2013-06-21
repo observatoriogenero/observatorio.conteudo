@@ -7,8 +7,6 @@ from zope.interface import Interface
 
 from zope import schema
 
-from observatorio.conteudo.validator import validar_termo
-
 
 class IObservatorioConteudoLayer(IDefaultPloneLayer):
     """Marker interface that defines a Zope 3 browser layer."""
