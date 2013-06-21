@@ -5,21 +5,50 @@ import unicodedata
 
 from five import grok
 
-from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 
+from observatorio.conteudo.interfaces import IConteudoSettings
 
-@grok.provider(IContextSourceBinder)
-def validar_termo(context):
-    """ funcao para validar se existe algum termo repetido
+
+class AreasTematicas(object):
+    """ vocabulario que retorna as areas tematicas
     """
+    grok.implements(IVocabularyFactory)
 
-    registry = getUtility(IRegistry)
-    import pdb;pdb.set_trace()
+    def __call__(self, context):
 
-#    terms = [ SimpleTerm(value=unicodedata.normalize('NFKD', pair).encode('ascii', 'ignore').lower(), token=unicodedata.normalize('NFKD', pair).encode('ascii', 'ignore').lower(), title=pair) for pair in items ]
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IConteudoSettings)
+        areas = settings.area_tematica
 
-    return True
+        if areas is not None:
+            termos = [SimpleTerm(unicodedata.normalize('NFKD', area).encode('ascii', 'ignore').lower(), unicodedata.normalize('NFKD', area).encode('ascii', 'ignore').lower(), area) for area in areas]
+        else:
+            termos = []
+        return SimpleVocabulary(termos)
+
+grok.global_utility(AreasTematicas, name=u"observatorio.conteudo.areas_tematicas")
+
+
+class EixoAtuacao(object):
+    """ vocabulario que retorna os eixos de atuacao
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IConteudoSettings)
+        eixos = settings.eixo_atuacao
+
+        if eixos is not None:
+            termos = [SimpleTerm(unicodedata.normalize('NFKD', eixo).encode('ascii', 'ignore').lower(), unicodedata.normalize('NFKD', eixo).encode('ascii', 'ignore').lower(), eixo) for eixo in eixos]
+        else:
+            termos = []
+        return SimpleVocabulary(termos)
+
+grok.global_utility(EixoAtuacao, name=u"observatorio.conteudo.eixos_atuacao")

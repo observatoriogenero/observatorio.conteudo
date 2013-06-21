@@ -27,10 +27,6 @@ class ContentTypeExtenderBooleanField(ExtensionField, BooleanField):
     """ Um campo booleano simples """
 
 
-class FolderExtenderStringField(ExtensionField, StringField):
-    """ Um campo string simples """
-
-
 class ContentTypeExtender(object):
     """
     """
@@ -49,49 +45,24 @@ class ContentTypeExtender(object):
 
         ContentTypeExtenderLinesField(
             name="eixo",
+            index="KeywordIndex:brains",
             widget=InAndOutWidget(
                 label="Eixo de Atuação",
-            )
+            ),
+            enforceVocabulary=True,
+            multiValued=True,
+            vocabulary_factory='observatorio.conteudo.eixos_atuacao',
         ),
 
         ContentTypeExtenderLinesField(
             name="area",
+            index="KeywordIndex:brains",
             widget=InAndOutWidget(
                 label="Área Temática",
-            )
-        ),
-        ]
-
-    def __init__(self, context):
-        self.context = context
-
-    def getFields(self):
-        return self.fields
-
-
-class FolderExtender(object):
-    """
-    """
-
-    adapts(IATFolder)
-    implements(ISchemaExtender)
-
-    fields = [
-
-        ContentTypeExtenderBooleanField(
-            name="destaque",
-            widget=BooleanWidget(
-                label="Destaque",
-                description="Selecione caso queira que o conteúdo seja um destaque",
             ),
-        ),
-
-        FolderExtenderStringField(
-            name="os",
-            widget=StringWidget(
-                label="OS",
-                description="Informe o número da OS",
-            ),
+            enforceVocabulary=True,
+            multiValued=True,
+            vocabulary_factory='observatorio.conteudo.areas_tematicas',
         ),
         ]
 
