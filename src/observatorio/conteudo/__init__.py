@@ -8,7 +8,7 @@ from Products.CMFCore import utils
 
 from observatorio.conteudo import config
 
-_ = MessageFactory('observatorio.conteudo')
+MessageFactory = MessageFactory('observatorio.conteudo')
 
 
 def initialize(context):

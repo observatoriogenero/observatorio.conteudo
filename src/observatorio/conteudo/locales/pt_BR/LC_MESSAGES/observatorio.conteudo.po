@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"POT-Creation-Date: 2013-05-17 18:46+0000\n"
+"PO-Revision-Date: 2013-05-03 11:40-0300\n"
+"Last-Translator: Gustavo Lepri <gustavolepri@gmail.com>\n"
+"Language-Team: Observatorio <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: pt-br\n"
+"Language-Name: Brazilian Portuguese\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: observatorio.conteudo\n"
+
+#: observatorio/conteudo/content/publicacao.py:19
+msgid "Arquivo"
+msgstr "Arquivo"
+
+#: observatorio/conteudo/content/publicacao.py:20
+msgid "Arquivo da publicacao."
+msgstr "Arquivo da publicação."
+
+#: observatorio/conteudo/profiles/default/types/Publicacao.xml
+msgid "Edit"
+msgstr "Editar"
+
+#: observatorio/conteudo/content/publicacao.py:28
+msgid "Imagem Capa"
+msgstr "Imagem da Capa"
+
+#: observatorio/conteudo/content/publicacao.py:29
+msgid "Imagem da capa da publicacao."
+msgstr "Imagem da capa da publicação. Caso não seja adicionado nenhuma imagem, será retirada a primeira capa da publicação como imagem."
+
+#: observatorio/conteudo/profiles/default/types/Publicacao.xml
+msgid "Publicacao"
+msgstr "Publicação"
+
+#: observatorio/conteudo/profiles/default/types/Publicacao.xml
+msgid "View"
+msgstr "Visualizar"
+

@@ -37,11 +37,13 @@ setup(
     zip_safe=False,
     install_requires=[
         'five.grok',
-        'five.pt',
         'Pillow',
         'Plone',
         'setuptools',
         'z3c.jbot',
+        'pyPdf',
+        'pbs',
+        'archetypes.schemaextender',
     ],
     extras_require={
         'test': [

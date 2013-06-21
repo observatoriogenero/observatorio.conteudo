@@ -1,42 +1,33 @@
-# convenience makefile to boostrap & run buildout
-# use `make options=-v` to run buildout with extra options
+# convenience Makefile to run tests and QA tools
+# options: zc.buildout options
+# src: source path
+# minimum_coverage: minimun test coverage allowed
+# pep8_ignores: ignore listed PEP 8 errors and warnings
+# max_complexity: maximum McCabe complexity allowed
+# css_ignores: skip file names matching find pattern (use ! -name PATTERN)
+# js_ignores: skip file names matching find pattern (use ! -name PATTERN)
 
-version = 2.7
-python = bin/python
-options =
+SHELL = /bin/sh
 
-all: docs tests
+options = -N -q -t 3
+src = src/observatorio/conteudo/
+minimum_coverage = 80
+pep8_ignores = E501
+max_complexity = 12
 
-docs: docs/html/index.html
+python-validation:
+        @echo Validating Python files
+        bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 
-docs/html/index.html: docs/*.rst src/observatorio/conteudo/*.py src/observatorio/conteudo/browser/*.py src/observatorio/conteudo/tests/*.py bin/sphinx-build
-	bin/sphinx-build docs docs/html
-	@touch $@
-	@echo "Documentation was generated at '$@'."
+quality-assurance: python-validation css-validation js-validation
+        @echo Quality assurance
+        ./coverage.sh $(minimum_coverage)
 
-bin/sphinx-build: .installed.cfg
-	@touch $@
+install:
+        mkdir -p buildout-cache/downloads
+        python bootstrap.py -c travis.cfg
+        bin/buildout -c travis.cfg $(options)
 
-.installed.cfg: bin/buildout buildout.cfg buildout.d/*.cfg setup.py
-	bin/buildout $(options)
-
-bin/buildout: $(python) buildout.cfg bootstrap.py
-	$(python) bootstrap.py -d
-	@touch $@
-
-$(python):
-	virtualenv -p python$(version) --no-site-packages .
-	@touch $@
-
-tests: .installed.cfg
-	@bin/test
-	@bin/flake8 src/observatorio/conteudo
-	@for pt in `find src/observatorio/conteudo -name "*.pt"` ; do bin/zptlint $$pt; done
-	@for xml in `find src/observatorio/conteudo -name "*.xml"` ; do bin/zptlint $$xml; done
-	@for zcml in `find src/observatorio/conteudo -name "*.zcml"` ; do bin/zptlint $$zcml; done
-
-clean:
-	@rm -rf .installed.cfg .mr.developer.cfg bin docs/html parts develop-eggs \
-		src/observatorio.conteudo.egg-info lib include .Python
-
-.PHONY: all docs tests clean
+tests:
+        bin/pocompile $(src)
+        bin/test

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <object name="Publicacao"
    meta_type="Factory-based Type Information with dynamic views"
-   i18n:domain="sc.imazonintranet.tipos" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Publicação</property>
+   i18n:domain="observatorio.conteudo" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Publicacao</property>
  <property name="description"
      i18n:translate=""></property>
  <property name="content_icon">++resource++observatorio.conteudo/publicacao_icon.png</property>

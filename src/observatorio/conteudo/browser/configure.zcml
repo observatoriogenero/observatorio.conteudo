@@ -14,4 +14,14 @@
       directory="static"
       />
 
+    <include package="plone.app.registry" />
+
+    <!-- Control panel -->
+    <browser:page
+        name="conteudo-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.ConteudoSettingsControlPanel"
+        permission="cmf.ManagePortal"
+        />
+
 </configure>
