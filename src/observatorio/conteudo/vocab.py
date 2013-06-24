@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import collections
 import unicodedata
 
 from five import grok

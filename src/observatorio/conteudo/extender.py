@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from Products.Archetypes.public import BooleanField, StringField, LinesField
-from Products.Archetypes.public import BooleanWidget, StringWidget, InAndOutWidget
+from Products.Archetypes.public import BooleanField, LinesField
+from Products.Archetypes.public import BooleanWidget, InAndOutWidget
 
-from Products.ATContentTypes.interface import IATContentType, IATFolder
+from Products.ATContentTypes.interface import IATContentType
 
 from zope.component import adapts
 from zope.interface import implements
@@ -67,7 +67,7 @@ class ContentTypeExtender(object):
             multiValued=True,
             vocabulary_factory='observatorio.conteudo.areas_tematicas',
         ),
-        ]
+    ]
 
     def __init__(self, context):
         self.context = context

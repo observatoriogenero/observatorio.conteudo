@@ -11,8 +11,6 @@ from plone.registry import Registry
 
 from observatorio.conteudo.interfaces import IConteudoSettings
 from observatorio.conteudo.testing import INTEGRATION_TESTING
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 
 
@@ -31,8 +29,7 @@ class TestControlPanel(unittest.TestCase):
 
     def test_conteudo_controlpanel_view(self):
         # Test the conteudo setting control panel view
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
-                name="conteudo-settings")
+        view = getMultiAdapter((self.portal, self.portal.REQUEST), name="conteudo-settings")
         view = view.__of__(self.portal)
         self.failUnless(view())
 
@@ -41,15 +38,12 @@ class TestControlPanel(unittest.TestCase):
         # by anonymous users
         from AccessControl import Unauthorized
         logout()
-        self.assertRaises(Unauthorized,
-            self.portal.restrictedTraverse,
-            '@@conteudo-settings')
+        self.assertRaises(Unauthorized, self.portal.restrictedTraverse, '@@conteudo-settings')
 
     def test_conteudo_in_controlpanel(self):
         # Check that there is an conteudo entry in the control panel
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.failUnless('conteudo' in [a.getAction(self)['id']
-                                      for a in self.controlpanel.listActions()])
+        self.failUnless('conteudo' in [a.getAction(self)['id'] for a in self.controlpanel.listActions()])
 
     def test_record_area_tematica(self):
         # Test that the area_tematica record is in the control panel

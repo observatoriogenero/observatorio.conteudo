@@ -7,7 +7,6 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.content.base import ATCTFileContent, ATContentTypeSchema
-from Products.ATContentTypes.content.file import ATFile
 
 from observatorio.conteudo import MessageFactory as _
 from observatorio.conteudo.config import PROJECTNAME
@@ -15,7 +14,8 @@ from observatorio.conteudo.interfaces import IPublicacao
 
 PublicacaoSchema = ATContentTypeSchema.copy() + atapi.Schema((
 
-    BlobField('arquivo',
+    BlobField(
+        name='arquivo',
         widget=atapi.FileWidget(
             label=_(u'Arquivo'),
             description=_(u'Arquivo da publicacao.'),
@@ -24,7 +24,8 @@ PublicacaoSchema = ATContentTypeSchema.copy() + atapi.Schema((
         primary=True,
     ),
 
-    ImageField('imagem',
+    ImageField(
+        name='imagem',
         widget=atapi.ImageWidget(
             label=_(u'Imagem Capa'),
             description=_(u'Imagem da capa da publicacao.'),

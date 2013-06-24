@@ -19,7 +19,7 @@ python-validation:
 	@echo Validating Python files
 	bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 
-quality-assurance: python-validation css-validation js-validation
+quality-assurance: python-validation
 	@echo Quality assurance
 	./coverage.sh $(minimum_coverage)
 

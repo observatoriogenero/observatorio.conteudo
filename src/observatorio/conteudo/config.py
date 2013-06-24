@@ -3,5 +3,5 @@
 PROJECTNAME = 'observatorio.conteudo'
 
 ADD_PERMISSIONS = {
-    'Publicacao' : 'observatorio.conteudo: Add Publicacao',
+    'Publicacao': 'observatorio.conteudo: Add Publicacao',
 }
