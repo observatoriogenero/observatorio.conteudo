@@ -9,9 +9,11 @@ from zope.component import adapts
 from zope.interface import implements
 
 from archetypes.schemaextender.field import ExtensionField
-from archetypes.schemaextender.interfaces import ISchemaExtender
+from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 
 from zope.interface import Interface
+
+from observatorio.conteudo.interfaces import IObservatorioConteudoLayer
 
 
 class IContentTypeExtender(Interface):
@@ -32,7 +34,8 @@ class ContentTypeExtender(object):
     """
 
     adapts(IATContentType)
-    implements(ISchemaExtender)
+    implements(IBrowserLayerAwareExtender)
+    layer = IObservatorioConteudoLayer
 
     fields = [
         ContentTypeExtenderBooleanField(
