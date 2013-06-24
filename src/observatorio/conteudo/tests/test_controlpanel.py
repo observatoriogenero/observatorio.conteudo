@@ -13,6 +13,7 @@ from observatorio.conteudo.interfaces import IConteudoSettings
 from observatorio.conteudo.testing import INTEGRATION_TESTING
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import logout
 
 
 class TestControlPanel(unittest.TestCase):
@@ -39,7 +40,7 @@ class TestControlPanel(unittest.TestCase):
         # Test that the conteudo setting control panel view can not be accessed
         # by anonymous users
         from AccessControl import Unauthorized
-        self.logout()
+        logout()
         self.assertRaises(Unauthorized,
             self.portal.restrictedTraverse,
             '@@conteudo-settings')
@@ -52,13 +53,13 @@ class TestControlPanel(unittest.TestCase):
 
     def test_record_area_tematica(self):
         # Test that the area_tematica record is in the control panel
-        record_area_tematica = self.registry.records[
-                             'observatorio.conteudo.interfaces.IConteudoSettings.area_tematica']
+        settings = self.registry.forInterface(IConteudoSettings)
+        record_area_tematica = settings.area_tematica
         self.failUnless('area_tematica' in IConteudoSettings)
-        self.assertEquals(record_area_tematica.value, u"")
+        self.assertEquals(record_area_tematica, None)
 
     def test_record_eixo_atuacao(self):
-        record_eixo_atuacao = self.registry.records[
-                              'observatorio.conteudo.interfaces.IConteudoSettings.eixo_atuacao']
+        settings = self.registry.forInterface(IConteudoSettings)
+        record_eixo_atuacao = settings.eixo_atuacao
         self.failUnless('eixo_atuacao' in IConteudoSettings)
-        self.assertEquals(record_eixo_atuacao.value, u"")
+        self.assertEquals(record_eixo_atuacao, None)

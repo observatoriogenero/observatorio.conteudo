@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from zope.app.container.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 import subprocess
 import cStringIO
