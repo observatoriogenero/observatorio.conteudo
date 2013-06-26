@@ -40,7 +40,7 @@ class ContentTypeExtender(object):
     fields = [
 
         ContentTypeExtenderLinesField(
-            name="eixos",
+            name="eixo",
             index="KeywordIndex:brains",
             widget=InAndOutWidget(
                 label="Eixo de Atuação",
