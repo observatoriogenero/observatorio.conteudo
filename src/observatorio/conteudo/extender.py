@@ -38,16 +38,9 @@ class ContentTypeExtender(object):
     layer = IObservatorioConteudoLayer
 
     fields = [
-        ContentTypeExtenderBooleanField(
-            name="destaque",
-            widget=BooleanWidget(
-                label="Destaque",
-                description="Selecione caso queira que o conteúdo seja um destaque",
-            ),
-        ),
 
         ContentTypeExtenderLinesField(
-            name="eixo",
+            name="eixos",
             index="KeywordIndex:brains",
             widget=InAndOutWidget(
                 label="Eixo de Atuação",
