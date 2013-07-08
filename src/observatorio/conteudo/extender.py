@@ -3,7 +3,10 @@
 from Products.Archetypes.public import BooleanField, StringField, LinesField
 from Products.Archetypes.public import BooleanWidget, StringWidget, InAndOutWidget
 
+from Products.Archetypes.interfaces import IBaseContent
+
 from Products.ATContentTypes.interface import IATContentType, IATFile
+from plone.app.blob.interfaces import IATBlob
 
 from zope.component import adapts
 from zope.interface import implements
@@ -52,7 +55,7 @@ class ContentTypeExtender(object):
     """
     """
 
-    adapts(IATContentType)
+    adapts(IBaseContent)
     implements(ISchemaExtender)
 
     fields = fields
@@ -64,17 +67,18 @@ class ContentTypeExtender(object):
         return self.fields
 
 
-class FileExtender(object):
-    """
-    """
-
-    adapts(IATFile)
-    implements(ISchemaExtender)
-
-    fields = fields
-
-    def __init__(self, context):
-        self.context = context
-
-    def getFields(self):
-        return self.fields
+#class FileExtender(object):
+#    """
+#    """
+#
+#    adapts(IATFile)
+#    implements(ISchemaExtender)
+#
+#    fields = fields
+#
+#    def __init__(self, context):
+#        self.context = context
+#
+#    def getFields(self):
+#        import pdb;pdb.set_trace()
+#        return self.fields

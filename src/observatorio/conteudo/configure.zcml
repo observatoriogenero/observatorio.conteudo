@@ -10,8 +10,9 @@
     <five:registerPackage package="." initialize=".initialize" />
 
     <include package="archetypes.schemaextender" />
-    <adapter factory=".extender.ContentTypeExtender" />
-    <adapter factory=".extender.FileExtender" />
+    <adapter factory=".extender.ContentTypeExtender"
+             name="observatorio_extender"/>
+    <!--<adapter factory=".extender.FileExtender" />-->
 
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
