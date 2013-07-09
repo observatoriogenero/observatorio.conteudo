@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from AccessControl import ClassSecurityInfo
-from Products.CMFCore.permissions import View
-
 from plone.app.blob.field import ImageField
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -41,7 +38,8 @@ BannerSchema = ATLinkSchema.copy() + atapi.Schema((
         required=False,
     ),
 
-    atapi.BooleanField('linkTarget',
+    atapi.BooleanField(
+        name='linkTarget',
         default=False,
         widget=atapi.BooleanWidget(
             label=_(u'Abrir link em nova janela'),
@@ -63,7 +61,6 @@ class Banner(ATLink):
     """
     """
 
-    security = ClassSecurityInfo()
     implements(IBanner)
 
     meta_type = "Banner"
@@ -71,7 +68,6 @@ class Banner(ATLink):
 
     _at_rename_after_creation = True
 
-    security.declareProtected(View, 'tag')
     def tag(self, **kwargs):
         """Generate image tag using the api of the ImageField
         """

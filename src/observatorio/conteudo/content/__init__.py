@@ -2,4 +2,3 @@
 
 from publicacao import IPublicacao
 publicacao = IPublicacao
-
