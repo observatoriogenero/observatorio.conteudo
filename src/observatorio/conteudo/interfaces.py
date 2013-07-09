@@ -12,6 +12,11 @@ class IObservatorioConteudoLayer(IDefaultPloneLayer):
     """Marker interface that defines a Zope 3 browser layer."""
 
 
+class IBanner(Interface):
+    """
+    """
+
+
 class IPublicacao(Interface):
     """
     """
