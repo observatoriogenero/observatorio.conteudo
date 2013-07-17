@@ -49,4 +49,9 @@ class Publicacao(ATCTFileContent):
 
     _at_rename_after_creation = True
 
+    def tag(self, **kwargs):
+        """Generate image tag using the api of the ImageField
+        """
+        return self.getField('imagem').tag(self, **kwargs)
+
 atapi.registerType(Publicacao, PROJECTNAME)
