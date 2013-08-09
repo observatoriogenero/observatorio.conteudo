@@ -4,10 +4,6 @@ import logging
 from five import grok
 from Products.Archetypes.interfaces import IObjectInitializedEvent
 import subprocess
-import cStringIO
-
-
-from PIL import Image
 
 from observatorio.conteudo.content import IPublicacao
 

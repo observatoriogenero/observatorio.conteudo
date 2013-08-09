@@ -9,7 +9,9 @@ from zope.component import adapts
 from zope.interface import implements
 
 from archetypes.schemaextender.field import ExtensionField
-from archetypes.schemaextender.interfaces import ISchemaExtender
+from archetypes.schemaextender.interfaces import ISchemaExtender, IBrowserLayerAwareExtender
+
+from observatorio.conteudo.interfaces import IObservatorioConteudoLayer
 
 
 class ContentTypeExtenderLinesField(ExtensionField, LinesField):
@@ -50,7 +52,9 @@ class ContentTypeExtender(object):
     """
 
     adapts(IBaseContent)
-    implements(ISchemaExtender)
+    implements(ISchemaExtender, IBrowserLayerAwareExtender)
+
+    layer = IObservatorioConteudoLayer
 
     fields = fields
 

@@ -11,6 +11,7 @@
 
   <include package="archetypes.schemaextender" />
   <adapter factory=".extender.ContentTypeExtender"
+           provides="archetypes.schemaextender.interfaces.ISchemaExtender"
            name="observatorio_extender"/>
 
   <!-- Include configuration for dependencies listed in setup.py -->
