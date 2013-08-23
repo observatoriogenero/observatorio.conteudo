@@ -10,9 +10,15 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <include package="archetypes.schemaextender" />
-  <adapter factory=".extender.ContentTypeExtender"
+  <adapter factory=".extender.PublicacaoExtender"
            provides="archetypes.schemaextender.interfaces.ISchemaExtender"
-           name="observatorio_extender"/>
+           name="publicacao_extender"/>
+  <adapter factory=".extender.FileExtender"
+           provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+           name="file_extender"/>
+  <adapter factory=".extender.LinkExtender"
+           provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+           name="link_extender"/>
 
   <!-- Include configuration for dependencies listed in setup.py -->
   <includeDependencies package="." />

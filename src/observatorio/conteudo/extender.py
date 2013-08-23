@@ -3,7 +3,7 @@
 from Products.Archetypes.public import BooleanField, LinesField
 from Products.Archetypes.public import InAndOutWidget
 
-from Products.Archetypes.interfaces import IBaseContent
+from Products.ATContentTypes.interfaces import IATLink, IATFile
 
 from zope.component import adapts
 from zope.interface import implements
@@ -12,6 +12,7 @@ from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender, IBrowserLayerAwareExtender
 
 from observatorio.conteudo.interfaces import IObservatorioConteudoLayer
+from observatorio.conteudo.interfaces import IPublicacao
 
 
 class ContentTypeExtenderLinesField(ExtensionField, LinesField):
@@ -29,6 +30,7 @@ fields = [
         widget=InAndOutWidget(
             label="Eixo de Atuação",
         ),
+        schemata="categorization",
         enforceVocabulary=True,
         multiValued=True,
         vocabulary_factory='observatorio.conteudo.eixos_atuacao',
@@ -40,6 +42,7 @@ fields = [
         widget=InAndOutWidget(
             label="Área Temática",
         ),
+        schemata="categorization",
         enforceVocabulary=True,
         multiValued=True,
         vocabulary_factory='observatorio.conteudo.areas_tematicas',
@@ -47,11 +50,11 @@ fields = [
 ]
 
 
-class ContentTypeExtender(object):
+class PublicacaoExtender(object):
     """
     """
 
-    adapts(IBaseContent)
+    adapts(IPublicacao)
     implements(ISchemaExtender, IBrowserLayerAwareExtender)
 
     layer = IObservatorioConteudoLayer
@@ -65,18 +68,35 @@ class ContentTypeExtender(object):
         return self.fields
 
 
-#class FileExtender(object):
-#    """
-#    """
-#
-#    adapts(IATFile)
-#    implements(ISchemaExtender)
-#
-#    fields = fields
-#
-#    def __init__(self, context):
-#        self.context = context
-#
-#    def getFields(self):
-#        import pdb;pdb.set_trace()
-#        return self.fields
+class FileExtender(object):
+    """
+    """
+
+    adapts(IATFile)
+    implements(ISchemaExtender)
+
+    fields = fields
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields
+
+
+class LinkExtender(object):
+    """
+    """
+
+    adapts(IATLink)
+    implements(ISchemaExtender, IBrowserLayerAwareExtender)
+
+    layer = IObservatorioConteudoLayer
+
+    fields = fields
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields
