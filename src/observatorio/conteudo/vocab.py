@@ -10,6 +10,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 
+from Products.CMFCore.utils import getToolByName
+
 from observatorio.conteudo.interfaces import IConteudoSettings
 
 
@@ -51,3 +53,22 @@ class EixoAtuacao(object):
         return SimpleVocabulary(termos)
 
 grok.global_utility(EixoAtuacao, name=u"observatorio.conteudo.eixos_atuacao")
+
+
+class PathBiblioteca(object):
+    """ vocabulario que retorna o path dos conteudos da biblioteca
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+
+        portal = getToolByName(context, 'portal_url').getPortalObject()
+        biblioteca = getattr(portal, 'biblioteca', None)
+
+        if biblioteca:
+            termos = [SimpleTerm('/'.join(obj.getPhysicalPath()), obj.Title()) for obj in biblioteca.objectValues() if obj.portal_type == 'Folder']
+        else:
+            termos = []
+        return SimpleVocabulary(termos)
+
+grok.global_utility(PathBiblioteca, name=u"observatorio.conteudo.path_biblioteca")
