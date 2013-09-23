@@ -66,7 +66,8 @@ class PathBiblioteca(object):
         biblioteca = getattr(portal, 'biblioteca', None)
 
         if biblioteca:
-            termos = [SimpleTerm('/'.join(obj.getPhysicalPath()), obj.Title()) for obj in biblioteca.objectValues() if obj.portal_type == 'Folder']
+            termos = sorted([('/'.join(obj.getPhysicalPath()), obj.Title()) for obj in biblioteca.objectValues() if obj.portal_type == 'Folder'])
+            termos = [SimpleTerm(termo[0], termo[1]) for termo in termos]
         else:
             termos = []
         return SimpleVocabulary(termos)
