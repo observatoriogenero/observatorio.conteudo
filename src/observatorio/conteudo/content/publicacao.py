@@ -25,7 +25,7 @@ PublicacaoSchema = ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     ImageField(
-        name='imagem',
+        name='image',
         widget=atapi.ImageWidget(
             label=_(u'Imagem Capa'),
             description=_(u'Imagem da capa da publicacao.'),
