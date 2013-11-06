@@ -38,7 +38,7 @@ def _cria_capa_publicacao(object):
         logger.warn("O processo Ghostscript nao terminou corretamente! Error Code: %d" % (return_code))
         png = None
     if png:
-        object.setImagem(png)
+        object.setImage(png)
 
 
 @grok.subscribe(IPublicacao, IObjectInitializedEvent)
