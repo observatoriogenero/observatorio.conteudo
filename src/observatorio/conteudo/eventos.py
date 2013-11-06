@@ -2,7 +2,7 @@
 
 import logging
 from five import grok
-from Products.Archetypes.interfaces import IObjectInitializedEvent
+from Products.Archetypes.interfaces import IObjectInitializedEvent, IObjectEditedEvent
 import subprocess
 
 from observatorio.conteudo.content import IPublicacao
@@ -10,8 +10,7 @@ from observatorio.conteudo.content import IPublicacao
 logger = logging.getLogger('observatorio.conteudo')
 
 
-@grok.subscribe(IPublicacao, IObjectInitializedEvent)
-def cria_capa_publicacao(object, event):
+def _cria_capa_publicacao(object):
     """
     """
     pdf = str(object.getArquivo())
@@ -40,3 +39,13 @@ def cria_capa_publicacao(object, event):
         png = None
     if png:
         object.setImagem(png)
+
+
+@grok.subscribe(IPublicacao, IObjectInitializedEvent)
+def cria_capa_publicaca_inclusao(object, event):
+    _cria_capa_publicacao(object)
+
+
+@grok.subscribe(IPublicacao, IObjectEditedEvent)
+def cria_capa_publicacao_edicao(object, event):
+    _cria_capa_publicacao(object)
